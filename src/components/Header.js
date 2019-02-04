@@ -29,8 +29,8 @@ const Header = () => {
           Home
         </MenuItem>
 
-        <MenuItem to='/commits' exact activeClassName='active-route'>
-          Commits
+        <MenuItem to='/landingPads' exact activeClassName='active-route'>
+          Landing Pads
         </MenuItem>
       </nav>
     </StyledHeader>

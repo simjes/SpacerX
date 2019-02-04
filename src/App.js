@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Commits from './components/Commits';
 import Header from './components/Header';
+import LandingPads from './components/LandingPads';
 import Landing from './pages/Landing';
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
 
           <main>
             <Route exact path='/' component={Landing} />
-            <Route exact path='/commits' component={Commits} />
+            <Route exact path='/landingPads' component={LandingPads} />
           </main>
         </>
       </Router>
