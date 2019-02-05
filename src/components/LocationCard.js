@@ -20,6 +20,9 @@ const Content = styled.div`
 `;
 
 const Footer = styled.div`
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
   margin-top: 3rem;
   font-size: 3rem;
 `;
