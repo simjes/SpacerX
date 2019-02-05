@@ -10,7 +10,7 @@ const MenuItem = styled(NavLink)`
   }
 `;
 
-const StyledHeader = styled.header`
+const Root = styled.header`
   background-color: #282c34;
   height: 6rem;
   display: flex;
@@ -23,17 +23,17 @@ const StyledHeader = styled.header`
 
 const Header = () => {
   return (
-    <StyledHeader>
+    <Root>
       <nav>
         <MenuItem to='/' exact activeClassName='active-route'>
           Home
         </MenuItem>
 
-        <MenuItem to='/landingPads' exact activeClassName='active-route'>
-          Landing Pads
+        <MenuItem to='/locations' exact activeClassName='active-route'>
+          Locations
         </MenuItem>
       </nav>
-    </StyledHeader>
+    </Root>
   );
 };
 

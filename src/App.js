@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import Header from './components/Header';
 import Home from './components/Home';
-import LandingPads from './components/LandingPads';
+import Locations from './components/Locations';
 import { theme } from './theme';
 
 const Main = styled.main`
@@ -22,7 +22,7 @@ class App extends Component {
 
             <Main>
               <Route exact path='/' component={Home} />
-              <Route exact path='/landingPads' component={LandingPads} />
+              <Route exact path='/locations' component={Locations} />
             </Main>
           </>
         </Router>
