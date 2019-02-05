@@ -1,22 +1,32 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import styled, { ThemeProvider } from 'styled-components';
 import Header from './components/Header';
+import Home from './components/Home';
 import LandingPads from './components/LandingPads';
-import Landing from './pages/Landing';
+import { theme } from './theme';
+
+const Main = styled.main`
+  margin: 0 auto;
+  margin-top: 3rem;
+  max-width: ${props => props.theme.maxWidth};
+`;
 
 class App extends Component {
   render() {
     return (
-      <Router>
-        <>
-          <Header />
+      <ThemeProvider theme={theme}>
+        <Router>
+          <>
+            <Header />
 
-          <main>
-            <Route exact path='/' component={Landing} />
-            <Route exact path='/landingPads' component={LandingPads} />
-          </main>
-        </>
-      </Router>
+            <Main>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/landingPads' component={LandingPads} />
+            </Main>
+          </>
+        </Router>
+      </ThemeProvider>
     );
   }
 }

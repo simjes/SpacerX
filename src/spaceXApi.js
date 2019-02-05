@@ -7,3 +7,7 @@ export const fetchLandingPads = () => {
 export const fetchLandingPad = id => {
   return fetch(`${apiBase}/landpads/${id}`).then(response => response.json());
 };
+
+export const fetchNextLaunch = () => {
+  return fetch(`${apiBase}/launches/next`).then(response => response.json());
+};

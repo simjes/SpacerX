@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { GET_LANDINGPADS, GET_LANDINGPAD } from '../state/landingPads';
+import LandingPadCard from './LandingPadCard';
+import styled from 'styled-components';
+
+const CardContainer = styled.div`
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+`;
+
+const Card = styled(LandingPadCard)``;
 
 class LandingPads extends Component {
   componentDidMount() {
@@ -9,21 +19,27 @@ class LandingPads extends Component {
     }
   }
 
-  loadDetails = (e, id) => {
-    e.preventDefault();
+  // loadDetails = (e, id) => {
+  //   e.preventDefault();
 
-    this.props.loadLandingPad(id);
-  };
+  //   this.props.loadLandingPad(id);
+  // };
 
   render() {
     return this.props.landingPads ? (
-      this.props.landingPads.map(pad => (
-        <button key={pad.id} onClick={e => this.loadDetails(e, pad.id)}>
-          {pad.id}
-        </button>
-      ))
+      <CardContainer>
+        {this.props.landingPads.map(pad => (
+          <Card
+            key={pad.id}
+            title={pad.full_name}
+            status={pad.status}
+            successfulLandings={pad.successful_landings}
+            attemptedLandings={pad.attempted_landings}
+          />
+        ))}
+      </CardContainer>
     ) : (
-      <p>no pads</p>
+      <p>No landingpads</p>
     );
   }
 }
