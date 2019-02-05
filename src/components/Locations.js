@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { GET_LANDINGPADS } from '../state/landingPads';
+import { GET_LANDING_PADS } from '../state/locations';
 import LocationCard from './LocationCard';
 
 const Header = styled.h1`
@@ -48,13 +48,13 @@ class Locations extends Component {
 
 const mapStateToProps = state => {
   return {
-    landingPads: state.landingPads.overviews
+    landingPads: state.locations.landingPads
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadLandingPads: () => dispatch({ type: GET_LANDINGPADS })
+    loadLandingPads: () => dispatch({ type: GET_LANDING_PADS })
   };
 };
 
