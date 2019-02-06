@@ -8,8 +8,8 @@ export const SET_NEXT_LAUNCH = 'SET_NEXT_LAUNCH';
 
 const initialState = {
   next: null,
-  next_loading: false,
-  next_error: null
+  nextLoading: false,
+  nextError: null
 };
 
 export function* getNextLaunch() {
@@ -32,9 +32,9 @@ export function* watchGetNextLaunch() {
 function launches(state = initialState, action) {
   switch (action.type) {
     case GET_NEXT_LAUNCH_LOADING:
-      return { ...state, next_loading: action.data };
+      return { ...state, nextLoading: action.data };
     case GET_NEXT_LAUNCH_ERROR:
-      return { ...state, next_error: action.data };
+      return { ...state, nextError: action.data };
     case SET_NEXT_LAUNCH:
       return { ...state, next: action.data };
     default:

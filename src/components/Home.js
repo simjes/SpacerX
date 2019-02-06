@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { GET_NEXT_LAUNCH } from '../state/launches';
+import { GET_NEXT_LAUNCH, getNextLaunchAction } from '../state/launches';
 
 const Jumbo = styled.div`
   display: flex;
@@ -69,14 +69,14 @@ class Home extends Component {
 const mapStateToProps = state => {
   return {
     nextLaunch: state.launches.next,
-    isLoading: state.launches.next_loading,
-    isError: state.launches.next_error
+    isLoading: state.launches.nextLoading,
+    isError: state.launches.nextError
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadNextLaunch: () => dispatch({ type: GET_NEXT_LAUNCH })
+    loadNextLaunch: () => dispatch(getNextLaunchAction())
   };
 };
 
