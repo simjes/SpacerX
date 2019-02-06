@@ -32,6 +32,10 @@ const Header = () => {
         <MenuItem to='/locations' exact activeClassName='active-route'>
           Locations
         </MenuItem>
+
+        <MenuItem to='/launches' exact activeClassName='active-route'>
+          Launches
+        </MenuItem>
       </nav>
     </Root>
   );
