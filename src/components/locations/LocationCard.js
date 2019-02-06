@@ -60,13 +60,13 @@ const LocationCard = ({
         <StatHighlighter
           stat={`${numberOfSuccesses}`}
           title='Successful'
-          subTitle={`${locationType}s`}
+          subTitle={locationType}
         />
 
         <StatHighlighter
           stat={`${numberOfAttempts}`}
           title='Attempted'
-          subTitle={`${locationType}s`}
+          subTitle={locationType}
         />
       </Content>
 

@@ -43,14 +43,14 @@ class Locations extends Component {
         <LocationSection
           locations={landingPads}
           title='Landing Pads'
-          locationType='landing'
+          locationType='landings'
           isLoading={landingPadsLoading}
         />
 
         <LocationSection
           locations={launchPads}
           title='Launch Pads'
-          locationType='launch'
+          locationType='launches'
           isLoading={launchPadsLoading}
         />
       </Root>
