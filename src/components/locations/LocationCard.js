@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import Card from './Card';
-import Emoji from './Emoji';
-import StatHighlighter from './StatHighlighter';
+import Card from '../Card';
+import Emoji from '../Emoji';
+import StatHighlighter from '../StatHighlighter';
 
 const Tilte = styled.div`
   font-size: 2.6rem;

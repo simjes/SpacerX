@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { GET_LANDING_PADS, GET_LAUNCH_PADS } from '../state/locations';
+import { GET_LANDING_PADS, GET_LAUNCH_PADS } from '../../state/locations';
 import LocationSection from './LocationSection';
 
 const Root = styled.div`

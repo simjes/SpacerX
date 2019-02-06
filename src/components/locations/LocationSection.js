@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import Loading from './Loading';
+import Loading from '../Loading';
+import NoResults from '../NoResults';
 import LocationCard from './LocationCard';
-import NoResults from './NoResults';
 
 const Root = styled.div`
   min-height: 40rem;
