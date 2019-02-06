@@ -48,7 +48,7 @@ const LocationCard = ({
   status,
   numberOfSuccesses,
   numberOfAttempts,
-  padType
+  locationType
 }) => {
   const statusIcon = getStatusSymbol(status);
 
@@ -60,13 +60,13 @@ const LocationCard = ({
         <StatHighlighter
           stat={`${numberOfSuccesses}`}
           title='Successful'
-          subTitle={`${padType}s`}
+          subTitle={`${locationType}s`}
         />
 
         <StatHighlighter
           stat={`${numberOfAttempts}`}
           title='Attempted'
-          subTitle={`${padType}s`}
+          subTitle={`${locationType}s`}
         />
       </Content>
 
@@ -82,7 +82,7 @@ LocationCard.propTypes = {
   status: PropTypes.string.isRequired,
   numberOfAttempts: PropTypes.number.isRequired,
   numberOfSuccesses: PropTypes.number.isRequired,
-  padType: PropTypes.string.isRequired
+  locationType: PropTypes.string.isRequired
 };
 
 export default LocationCard;

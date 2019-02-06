@@ -1,60 +1,76 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { GET_LANDING_PADS } from '../state/locations';
-import LocationCard from './LocationCard';
+import { GET_LANDING_PADS, GET_LAUNCH_PADS } from '../state/locations';
+import LocationSection from './LocationSection';
 
-const Header = styled.h1`
-  font-size: 3rem;
-  text-align: center;
-`;
-
-const CardContainer = styled.div`
-  display: grid;
-  grid-gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+const Root = styled.div`
+  > * {
+    &:not(:first-child) {
+      margin-top: 6rem;
+    }
+  }
 `;
 
 class Locations extends Component {
   componentDidMount() {
-    if (!this.props.landingPads.length) {
-      this.props.loadLandingPads();
+    const {
+      landingPads,
+      launchPads,
+      loadLandingPads,
+      loadLaunchPads
+    } = this.props;
+
+    if (!landingPads) {
+      loadLandingPads();
+    }
+
+    if (!launchPads) {
+      loadLaunchPads();
     }
   }
 
   render() {
-    return this.props.landingPads ? (
-      <>
-        <Header>Landing Pads</Header>
+    const {
+      landingPads,
+      launchPads,
+      landingPadsLoading,
+      launchPadsLoading
+    } = this.props;
 
-        <CardContainer>
-          {this.props.landingPads.map(pad => (
-            <LocationCard
-              key={pad.id}
-              title={pad.full_name}
-              status={pad.status}
-              numberOfSuccesses={pad.successful_landings}
-              numberOfAttempts={pad.attempted_landings}
-              padType='landing'
-            />
-          ))}
-        </CardContainer>
-      </>
-    ) : (
-      <p>No landingpads</p> /* TODO: no results found component */
+    return (
+      <Root>
+        <LocationSection
+          locations={landingPads}
+          title='Landing Pads'
+          locationType='landing'
+          isLoading={landingPadsLoading}
+        />
+
+        <LocationSection
+          locations={launchPads}
+          title='Launch Pads'
+          locationType='launch'
+          isLoading={launchPadsLoading}
+        />
+      </Root>
     );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    landingPads: state.locations.landingPads
+    landingPads: state.locations.landingPads,
+    landingPadsLoading: state.locations.landingPadsLoading,
+    launchPads: state.locations.launchPads,
+    launchPadsLoading: state.locations.launchPadsLoading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadLandingPads: () => dispatch({ type: GET_LANDING_PADS })
+    loadLandingPads: () => dispatch({ type: GET_LANDING_PADS }),
+    loadLaunchPads: () => dispatch({ type: GET_LAUNCH_PADS })
   };
 };
 
