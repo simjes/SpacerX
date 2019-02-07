@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
-import launches, { watchGetNextLaunch } from './launch';
+import launches, { watchGetLaunches, watchGetNextLaunch } from './launch';
 import locations, { watchGetLandingPads, watchGetLaunchPads } from './location';
 
 const reducers = combineReducers({
@@ -23,7 +23,8 @@ function* rootSaga() {
   yield all([
     watchGetNextLaunch(),
     watchGetLandingPads(),
-    watchGetLaunchPads()
+    watchGetLaunchPads(),
+    watchGetLaunches()
   ]);
 }
 

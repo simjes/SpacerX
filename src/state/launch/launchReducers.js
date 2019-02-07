@@ -1,14 +1,20 @@
 import { handleActions } from 'redux-actions';
 import {
+  errorLaunches,
   errorNextLaunch,
+  requestingLaunches,
   requestingNextLaunch,
+  setLaunches,
   setNextLaunch
 } from './launchActions';
 
 const initialState = {
   next: null,
   errorNext: null,
-  requestingNext: false
+  requestingNext: false,
+  all: null,
+  errorAll: null,
+  requestingAll: false
 };
 
 const launches = handleActions(
@@ -26,6 +32,20 @@ const launches = handleActions(
       ...state,
       errorNext: action.payload,
       requestingNext: false
+    }),
+    [setLaunches]: (state, action) => ({
+      ...state,
+      all: action.payload,
+      requestingAll: false
+    }),
+    [requestingLaunches]: (state, _) => ({
+      ...state,
+      requestingAll: true
+    }),
+    [errorLaunches]: (state, action) => ({
+      ...state,
+      errorAll: action.payload,
+      requestingAll: false
     })
   },
   initialState

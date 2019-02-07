@@ -1,9 +1,13 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { requestNextLaunch } from '../../services/spaceXApi';
+import { requestLaunches, requestNextLaunch } from '../../services/spaceXApi';
 import {
+  errorLaunches,
   errorNextLaunch,
+  getLaunches,
   getNextLaunch,
+  requestingLaunches,
   requestingNextLaunch,
+  setLaunches,
   setNextLaunch
 } from './launchActions';
 
@@ -19,5 +23,20 @@ export function* fetchNextLaunch() {
     yield put(setNextLaunch(nextLaunch));
   } catch (error) {
     yield put(errorNextLaunch(error));
+  }
+}
+
+export function* watchGetLaunches() {
+  yield takeLatest(getLaunches, fetchLaunches);
+}
+
+export function* fetchLaunches() {
+  try {
+    yield put(requestingLaunches());
+
+    const launches = yield call(requestLaunches);
+    yield put(setLaunches(launches));
+  } catch (error) {
+    yield put(errorLaunches(error));
   }
 }
