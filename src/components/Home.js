@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { getNextLaunch } from '../state/launch/launchActions';
+import { getNextLaunch } from '../state/launch';
 
 const Root = styled.div`
   display: flex;

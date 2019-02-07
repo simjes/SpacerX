@@ -13,6 +13,7 @@ import {
   getLandingPads,
   getLaunchPads,
   requestingLandingPads,
+  requestingLaunchPads,
   setLandingPads,
   setLaunchPads
 } from './locationActions';
@@ -39,7 +40,7 @@ export function* fetchLandingPads() {
 }
 export function* fetchLaunchPads() {
   try {
-    yield put(requestingLandingPads());
+    yield put(requestingLaunchPads());
 
     const launchPads = yield call(requestLaunchPads);
     const locations = mapLaunchPadsToLocations(launchPads);

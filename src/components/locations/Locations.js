@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import {
-  getLandingPads,
-  getLaunchPads
-} from '../../state/location/locationActions';
+import { getLandingPads, getLaunchPads } from '../../state/location';
 import LocationSection from './LocationSection';
 
 const Root = styled.div`

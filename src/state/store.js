@@ -1,13 +1,8 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
-import launches from './launch/launchReducers';
-import { watchGetNextLaunch } from './launch/launchSagas';
-import locations from './location/locationReducers';
-import {
-  watchGetLaunchPads,
-  watchGetLandingPads
-} from './location/locationSagas';
+import launches, { watchGetNextLaunch } from './launch';
+import locations, { watchGetLandingPads, watchGetLaunchPads } from './location';
 
 const reducers = combineReducers({
   locations,
