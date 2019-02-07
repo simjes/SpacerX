@@ -2,9 +2,9 @@ import { format } from 'date-fns';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { GET_NEXT_LAUNCH, getNextLaunchAction } from '../state/launches';
+import { getNextLaunch } from '../state/launch/launchActions';
 
-const Jumbo = styled.div`
+const Root = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,7 +16,7 @@ const Jumbo = styled.div`
 
   color: white;
 
-  div {
+  > div {
     background: #000000aa;
     text-align: center;
     padding: 1rem;
@@ -42,10 +42,10 @@ class Home extends Component {
   }
 
   render() {
-    const { nextLaunch, isLoading } = this.props;
+    const { nextLaunch, isLoading, isError } = this.props;
 
     return (
-      <Jumbo>
+      <Root>
         {isLoading ? null : (
           <div>
             {nextLaunch ? (
@@ -56,12 +56,14 @@ class Home extends Component {
                   {format(nextLaunch.launch_date_utc, 'DD MMM YYYY')}
                 </SubHeader>
               </>
+            ) : isError ? (
+              <p>CREATE ERROR COMPONENT</p>
             ) : (
-              <Header>'No scheduled launches'</Header>
+              <Header>No scheduled launches</Header>
             )}
           </div>
         )}
-      </Jumbo>
+      </Root>
     );
   }
 }
@@ -69,14 +71,14 @@ class Home extends Component {
 const mapStateToProps = state => {
   return {
     nextLaunch: state.launches.next,
-    isLoading: state.launches.nextLoading,
-    isError: state.launches.nextError
+    isError: state.launches.errorNext,
+    isLoading: state.launches.requestingNext
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadNextLaunch: () => dispatch(getNextLaunchAction())
+    loadNextLaunch: () => dispatch(getNextLaunch())
   };
 };
 

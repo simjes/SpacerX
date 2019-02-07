@@ -1,13 +1,13 @@
 const apiBase = 'https://api.spacexdata.com/v3';
 
-export const fetchLandingPads = () => {
+export const requestLandingPads = () => {
   return fetch(`${apiBase}/landpads`).then(response => response.json());
 };
 
-export const fetchNextLaunch = () => {
+export const requestNextLaunch = () => {
   return fetch(`${apiBase}/launches/next`).then(response => response.json());
 };
 
-export const fetchLaunchPads = () => {
+export const requestLaunchPads = () => {
   return fetch(`${apiBase}/launchpads`).then(response => response.json());
 };

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { GET_LANDING_PADS, GET_LAUNCH_PADS } from '../../state/locations';
+import {
+  getLandingPads,
+  getLaunchPads
+} from '../../state/location/locationActions';
 import LocationSection from './LocationSection';
 
 const Root = styled.div`
@@ -34,8 +37,8 @@ class Locations extends Component {
     const {
       landingPads,
       launchPads,
-      landingPadsLoading,
-      launchPadsLoading
+      requestingLandingPads,
+      requestingLaunchPads
     } = this.props;
 
     return (
@@ -44,14 +47,14 @@ class Locations extends Component {
           locations={landingPads}
           title='Landing Pads'
           locationType='landings'
-          isLoading={landingPadsLoading}
+          isLoading={requestingLandingPads}
         />
 
         <LocationSection
           locations={launchPads}
           title='Launch Pads'
           locationType='launches'
-          isLoading={launchPadsLoading}
+          isLoading={requestingLaunchPads}
         />
       </Root>
     );
@@ -61,16 +64,16 @@ class Locations extends Component {
 const mapStateToProps = state => {
   return {
     landingPads: state.locations.landingPads,
-    landingPadsLoading: state.locations.landingPadsLoading,
+    requestingLandingPads: state.locations.requestingLandingPads,
     launchPads: state.locations.launchPads,
-    launchPadsLoading: state.locations.launchPadsLoading
+    requestingLaunchPads: state.locations.requestingLaunchPads
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadLandingPads: () => dispatch({ type: GET_LANDING_PADS }),
-    loadLaunchPads: () => dispatch({ type: GET_LAUNCH_PADS })
+    loadLandingPads: () => dispatch(getLandingPads()),
+    loadLaunchPads: () => dispatch(getLaunchPads())
   };
 };
 
