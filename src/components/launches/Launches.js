@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import { getLaunches } from '../../state/launch';
 import {
   filterFailedLaunches,
@@ -10,6 +10,7 @@ import {
 } from '../../utils/launchUtils';
 import Loading from '../Loading';
 import LaunchList from './LauchList';
+import LaunchBulletChart from './LaunchBulletChart';
 import LaunchPieChart from './LaunchPieChart';
 
 const Root = styled.div`
@@ -45,48 +46,63 @@ class Launches extends Component {
     }
   }
 
-  getLaunchSuccessAndFails = launches => {
+  launchSuccessAndFails = (launches, theme) => {
     return [
       {
         id: 'Success',
         label: 'Success',
         value: filterSuccessfulLaunches(launches).length,
-        color: '#b2df8a'
+        color: theme.successColor
       },
       {
         id: 'Failed',
         label: 'Failed',
         value: filterFailedLaunches(launches).length,
-        color: '#fb9a99'
+        color: theme.failColor
       }
     ];
   };
 
-  getLaunchesWithLandingIntent = launches => {
+  launchesWithLandingIntent = (launches, theme) => {
     return [
       {
         id: 'Intent',
         label: 'Landing Intent',
         value: filterLaunchesWithLandingIntent(launches).length,
-        color: '#b2df8a'
+        color: theme.successColor
       },
       {
         id: 'No Intent',
         label: 'No Landing Intent',
         value: filterLaunchesWithoutLandingIntent(launches).length,
-        color: '#fb9a99'
+        color: theme.failColor
+      }
+    ];
+  };
+
+  launchStats = (launches, theme) => {
+    const rangeGap = launches.length / 4;
+
+    return [
+      {
+        id: 'Launches',
+        ranges: [0, rangeGap, rangeGap * 2, rangeGap * 3, launches.length],
+        measures: [10], // Todo: Should be successful landings
+        markers: [filterLaunchesWithLandingIntent(launches).length]
       }
     ];
   };
 
   render() {
-    const { launches, isLoading } = this.props;
+    const { launches, theme, isLoading } = this.props;
     let successFailData = [];
     let landingIntentData = [];
+    let launchBulletData = [];
 
     if (launches) {
-      successFailData = this.getLaunchSuccessAndFails(launches);
-      landingIntentData = this.getLaunchesWithLandingIntent(launches);
+      successFailData = this.launchSuccessAndFails(launches, theme);
+      landingIntentData = this.launchesWithLandingIntent(launches, theme);
+      launchBulletData = this.launchStats(launches, theme);
     }
 
     return (
@@ -101,7 +117,13 @@ class Launches extends Component {
               <LaunchPieChart title='Landing Intent' data={landingIntentData} />
             </Charts>
 
-            {launches && <LaunchList launches={launches} />}
+            {launches && (
+              <>
+                <LaunchBulletChart launches={launchBulletData} />
+
+                <LaunchList launches={launches} />
+              </>
+            )}
           </>
         )}
       </Root>
@@ -126,4 +148,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Launches);
+)(withTheme(Launches));
