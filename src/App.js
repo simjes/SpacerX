@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import Header from './components/Header';
 import Home from './components/Home';
-import Launches from './components/Launches';
+import Launches from './components/launches/Launches';
 import Locations from './components/locations/Locations';
 import { theme } from './theme';
 
