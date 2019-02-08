@@ -4,12 +4,21 @@ import styled from 'styled-components';
 import { getLaunches } from '../../state/launch';
 import {
   filterFailedLaunches,
-  filterSuccessfulLaunches,
   filterLaunchesWithLandingIntent,
-  filterLaunchesWithoutLandingIntent
+  filterLaunchesWithoutLandingIntent,
+  filterSuccessfulLaunches
 } from '../../utils/launchUtils';
-import LaunchPieChart from './LaunchPieChart';
 import Loading from '../Loading';
+import LaunchList from './LauchList';
+import LaunchPieChart from './LaunchPieChart';
+
+const Root = styled.div`
+  > * {
+    &:not(:first-child) {
+      margin-top: 5rem;
+    }
+  }
+`;
 
 const Charts = styled.div`
   display: flex;
@@ -81,17 +90,21 @@ class Launches extends Component {
     }
 
     return (
-      <div>
+      <Root>
         {isLoading ? (
           <Loading />
         ) : (
-          <Charts>
-            <LaunchPieChart title='Launch Attempts' data={successFailData} />
+          <>
+            <Charts>
+              <LaunchPieChart title='Launch Attempts' data={successFailData} />
 
-            <LaunchPieChart title='Landing Intent' data={landingIntentData} />
-          </Charts>
+              <LaunchPieChart title='Landing Intent' data={landingIntentData} />
+            </Charts>
+
+            {launches && <LaunchList launches={launches} />}
+          </>
         )}
-      </div>
+      </Root>
     );
   }
 }

@@ -35,7 +35,11 @@ export function* fetchLaunches() {
     yield put(requestingLaunches());
 
     const launches = yield call(requestLaunches);
-    yield put(setLaunches(launches));
+    const sortedLaunches = launches.sort(
+      (a, b) => b.launch_year - a.launch_year
+    );
+
+    yield put(setLaunches(sortedLaunches));
   } catch (error) {
     yield put(errorLaunches(error));
   }
