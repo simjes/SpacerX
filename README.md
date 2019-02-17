@@ -1,3 +1,6 @@
+# SpacerX
+Random project for getting familiar with [`redux-saga`](https://github.com/redux-saga/redux-saga) and [`redux-actions`](https://github.com/redux-utilities/redux-actions)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
